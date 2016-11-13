@@ -1,0 +1,24 @@
+﻿<h1>Orders</h1>
+
+<div class="alert alert-info" role="alert" *ngIf="result">
+    <strong>{{ result.message }}</strong>
+</div>
+
+<table class="table table-hover" *ngIf="result">
+    <tr>
+        <th>#</th>
+        <th>Order Date</th>
+        <th>Due Date</th>
+        <th>Ship Date</th>
+        <th>Lines</th>
+    </tr>
+    <tr *ngFor="let item of result.model">
+        <td>{{ item.salesOrderID }}</td>
+        <td>{{ item.orderDate | date: "medium" }}</td>
+        <td>{{ item.dueDate | date: "medium" }}</td>
+        <td>{{ item.shipDate | date: "medium" }}</td>
+        <td style="text-align: right;">
+            {{ item.lines }}
+        </td>
+    </tr>
+</table>
