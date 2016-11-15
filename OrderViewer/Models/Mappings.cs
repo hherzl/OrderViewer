@@ -29,5 +29,40 @@ namespace OrderViewer.Models
 
             return modelBuilder;
         }
+
+        public static ModelBuilder MapCustomer(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<Customer>();
+
+            entity.ToTable("Customer", "Sales");
+
+            entity.HasKey(p => new { p.CustomerID });
+
+            entity.Property(p => p.CustomerID).UseSqlServerIdentityColumn();
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapPerson(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<Person>();
+
+            entity.ToTable("Person", "Person");
+
+            entity.HasKey(p => new { p.BusinessEntityID });
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapStore(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<Store>();
+
+            entity.ToTable("Store", "Sales");
+
+            entity.HasKey(p => new { p.BusinessEntityID });
+
+            return modelBuilder;
+        }
     }
 }

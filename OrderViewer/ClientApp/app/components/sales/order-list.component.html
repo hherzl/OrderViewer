@@ -1,6 +1,7 @@
 ﻿<h1>Orders</h1>
 
 <div class="alert alert-info" role="alert" *ngIf="result">
+    <span class="glyphicon glyphicon-info-sign"></span>
     <strong>{{ result.message }}</strong>
 </div>
 
@@ -8,17 +9,36 @@
     <tr>
         <th>#</th>
         <th>Order Date</th>
-        <th>Due Date</th>
         <th>Ship Date</th>
+        <th>Due Date</th>
+        <th>Sales Order #</th>
+        <th>Customer</th>
+        <th>Total Due</th>
         <th>Lines</th>
+        <th></th>
     </tr>
     <tr *ngFor="let item of result.model">
         <td>{{ item.salesOrderID }}</td>
-        <td>{{ item.orderDate | date: "medium" }}</td>
-        <td>{{ item.dueDate | date: "medium" }}</td>
-        <td>{{ item.shipDate | date: "medium" }}</td>
+        <td>{{ item.orderDate | date: "shortDate" }}</td>
+        <td>{{ item.shipDate | date: "shortDate" }}</td>
+        <td>{{ item.dueDate | date: "shortDate" }}</td>
+        <td>{{ item.salesOrderNumber }}</td>
+        <td>{{ item.customerName }}</td>
+        <td style="text-align: right;">
+            {{ item.totalDue | currency }}
+        </td>
         <td style="text-align: right;">
             {{ item.lines }}
+        </td>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>View details</li>
+                </ul>
+            </div>
         </td>
     </tr>
 </table>

@@ -30,7 +30,7 @@ namespace OrderViewer.Controllers
         }
 
         [HttpGet("Order")]
-        public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1)
+        public async Task<IActionResult> GetOrders(Int32? pageSize = 100, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
         {
             var response = new ListModelResponse<OrderSummaryViewModel>() as IListModelResponse<OrderSummaryViewModel>;
 
@@ -41,7 +41,7 @@ namespace OrderViewer.Controllers
 
                 response.Model = await Task.Run(() =>
                 {
-                    return SalesRepository.GetOrders((Int32)pageSize, (Int32)pageNumber);
+                    return SalesRepository.GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName);
                 });
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());

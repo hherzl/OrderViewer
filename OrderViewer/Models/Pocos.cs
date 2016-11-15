@@ -84,4 +84,65 @@ namespace OrderViewer.Models
 
         public DateTime? ModifiedDate { get; set; }
     }
+
+    public class Customer
+    {
+        public Int32? CustomerID { get; set; }
+
+        public Int32? PersonID { get; set; }
+
+        public Int32? StoreID { get; set; }
+
+        public Int32? TerritoryID { get; set; }
+
+        public String AccountNumber { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class Person
+    {
+        public Int32? BusinessEntityID { get; set; }
+
+        public String PersonType { get; set; }
+
+        public Boolean? NameStyle { get; set; }
+
+        public String Title { get; set; }
+
+        public String FirstName { get; set; }
+
+        public String MiddleName { get; set; }
+
+        public String LastName { get; set; }
+
+        public String Suffix { get; set; }
+
+        public Int32? EmailPromotion { get; set; }
+
+        public String AdditionalContactInfo { get; set; }
+
+        public String Demographics { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class Store
+    {
+        public Int32? BusinessEntityID { get; set; }
+
+        public String Name { get; set; }
+
+        public Int32? SalesPersonID { get; set; }
+
+        public String Demographics { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
 }

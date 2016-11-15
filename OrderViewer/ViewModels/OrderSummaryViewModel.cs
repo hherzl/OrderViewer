@@ -14,6 +14,12 @@ namespace OrderViewer.ViewModels
 
         public String SalesOrderNumber { get; set; }
 
+        public Int32? CustomerID { get; set; }
+
+        public String CustomerName { get; set; }
+
         public Int32 Lines { get; set; }
+
+        public Decimal? TotalDue { get; set; }
     }
 }

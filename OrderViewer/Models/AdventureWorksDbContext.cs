@@ -24,7 +24,10 @@ namespace OrderViewer.Models
         {
             modelBuilder
                 .MapSalesOrderHeader()
-                .MapSalesOrderDetail();
+                .MapSalesOrderDetail()
+                .MapCustomer()
+                .MapPerson()
+                .MapStore();
 
             base.OnModelCreating(modelBuilder);
         }
