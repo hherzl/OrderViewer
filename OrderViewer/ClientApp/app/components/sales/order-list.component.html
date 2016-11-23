@@ -1,5 +1,34 @@
 ﻿<h1>Orders</h1>
 
+<fieldset>
+    <legend>Search</legend>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Sales Order Number" [(ngModel)]="salesOrderNumber" />
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Customer Name" [(ngModel)]="customerName" />
+        </div>
+
+        <div class="form-group">
+            <select id="pageSize" name="pageSize" class="form-control list-box tri-state" [(ngModel)]="pageSize">
+                <option value="10" selected="selected">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-primary glyphicon glyphicon-search" (click)="search()"></button>
+        </div>
+    </div>
+</fieldset>
+
+<br />
+
 <div class="alert alert-info" role="alert" *ngIf="result">
     <span class="glyphicon glyphicon-info-sign"></span>
     <strong>{{ result.message }}</strong>
@@ -36,7 +65,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li>View details</li>
+                    <li><a (click)="details(item)">Details</a></li>
                 </ul>
             </div>
         </td>

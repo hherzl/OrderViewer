@@ -5,6 +5,11 @@ namespace OrderViewer.Models
 {
     public class SalesOrderHeader
     {
+        public SalesOrderHeader()
+        {
+            SalesOrderDetails = new Collection<SalesOrderDetail>();
+        }
+
         public Int32? SalesOrderID { get; set; }
 
         public Byte? RevisionNumber { get; set; }
@@ -57,6 +62,10 @@ namespace OrderViewer.Models
 
         public DateTime? ModifiedDate { get; set; }
 
+        public virtual Customer CustomerFk { get; set; }
+
+        public virtual SalesPerson SalesPersonFk { get; set; }
+
         public virtual Collection<SalesOrderDetail> SalesOrderDetails { get; set; }
     }
 
@@ -83,6 +92,8 @@ namespace OrderViewer.Models
         public Guid? Rowguid { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        public virtual Product ProductFk { get; set; }
     }
 
     public class Customer
@@ -100,6 +111,10 @@ namespace OrderViewer.Models
         public Guid? Rowguid { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        public virtual Person PersonFk { get; set; }
+
+        public virtual Store StoreFk { get; set; }
     }
 
     public class Person
@@ -142,6 +157,56 @@ namespace OrderViewer.Models
         public String Demographics { get; set; }
 
         public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class SalesPerson
+    {
+        public Int32? BusinessEntityID { get; set; }
+
+        public Int32? TerritoryID { get; set; }
+
+        public Decimal? SalesQuota { get; set; }
+
+        public Decimal? Bonus { get; set; }
+
+        public Decimal? CommissionPct { get; set; }
+
+        public Decimal? SalesYTD { get; set; }
+
+        public Decimal? SalesLastYear { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class Product
+    {
+        public Int32? ProductID { get; set; }
+
+        public String Name { get; set; }
+
+        public String ProductNumber { get; set; }
+
+        public Boolean? MakeFlag { get; set; }
+
+        public Boolean? FinishedGoodsFlag { get; set; }
+
+        public Int16? SafetyStockLevel { get; set; }
+
+        public Int16? ReorderPoint { get; set; }
+
+        public Decimal? StandardCost { get; set; }
+
+        public Decimal? ListPrice { get; set; }
+
+        public Int32? DaysToManufacture { get; set; }
+
+        public DateTime? SellStartDate { get; set; }
+
+        public Guid? rowguid { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
     }

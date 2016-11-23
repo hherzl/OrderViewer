@@ -30,7 +30,7 @@ namespace OrderViewer.Controllers
         }
 
         [HttpGet("Order")]
-        public async Task<IActionResult> GetOrders(Int32? pageSize = 100, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
+        public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
         {
             var response = new ListModelResponse<OrderSummaryViewModel>() as IListModelResponse<OrderSummaryViewModel>;
 
@@ -45,6 +45,27 @@ namespace OrderViewer.Controllers
                 });
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
+            }
+            catch (Exception ex)
+            {
+                response.DidError = true;
+                response.ErrorMessage = ex.Message;
+            }
+
+            return response.ToHttpResponse();
+        }
+
+        [HttpGet("Order/{id}")]
+        public async Task<IActionResult> GetOrder(Int32 id)
+        {
+            var response = new SingleModelResponse<OrderHeaderViewModel>() as ISingleModelResponse<OrderHeaderViewModel>;
+
+            try
+            {
+                response.Model = await Task.Run(() =>
+                {
+                    return SalesRepository.GetOrder(id);
+                });
             }
             catch (Exception ex)
             {

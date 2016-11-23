@@ -1,0 +1,42 @@
+﻿<h2>Order Detail</h2>
+
+<div *ngIf="result">
+    <div>
+        <dl class="dl-horizontal">
+            <dt>Order date</dt>
+            <dd>{{ result.model.orderDate }}</dd>
+
+            <dt></dt>
+            <dd></dd>
+        </dl>
+    </div>
+
+    <h3>Details</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Product name</th>
+            <th style="text-align: right;">Unit price</th>
+            <th style="text-align: right;">Quantity</th>
+            <th style="text-align: right;">Line total</th>
+        </tr>
+        <tr *ngFor="let item of result.model.orderDetails">
+            <td>
+                {{ item.productName }}
+            </td>
+            <td style="text-align: right;">
+                {{ item.unitPrice | currency }}
+            </td>
+            <td style="text-align: right;">
+                {{ item.orderQty }}
+            </td>
+            <td style="text-align: right;">
+                {{ item.lineTotal | currency }}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p>
+    <a (click)="backToList()">Back to list</a>
+</p>

@@ -90,5 +90,39 @@ namespace Tests
 
             Assert.False(value.DidError);
         }
+
+        [Fact]
+        public async Task TestGetOrder_Async()
+        {
+            // Arrange
+            var controller = new SalesController(SalesRepository);
+
+            var id = 75123;
+
+            // Act
+            var response = await controller.GetOrder(id) as ObjectResult;
+
+            // Assert
+            var value = response.Value as ISingleModelResponse<OrderHeaderViewModel>;
+
+            Assert.False(value.DidError);
+        }
+
+        [Fact]
+        public async Task TestGetOrderNotFound_Async()
+        {
+            // Arrange
+            var controller = new SalesController(SalesRepository);
+
+            var id = 0;
+
+            // Act
+            var response = await controller.GetOrder(id) as ObjectResult;
+
+            // Assert
+            var value = response.Value as ISingleModelResponse<OrderHeaderViewModel>;
+
+            Assert.False(value.DidError);
+        }
     }
 }

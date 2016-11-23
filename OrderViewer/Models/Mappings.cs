@@ -10,7 +10,7 @@ namespace OrderViewer.Models
 
             entity.ToTable("SalesOrderHeader", "Sales");
 
-            entity.HasKey(p => new { p.SalesOrderID });
+            entity.HasKey(p => p.SalesOrderID);
 
             entity.Property(p => p.SalesOrderID).UseSqlServerIdentityColumn();
 
@@ -36,7 +36,7 @@ namespace OrderViewer.Models
 
             entity.ToTable("Customer", "Sales");
 
-            entity.HasKey(p => new { p.CustomerID });
+            entity.HasKey(p => p.CustomerID);
 
             entity.Property(p => p.CustomerID).UseSqlServerIdentityColumn();
 
@@ -49,7 +49,7 @@ namespace OrderViewer.Models
 
             entity.ToTable("Person", "Person");
 
-            entity.HasKey(p => new { p.BusinessEntityID });
+            entity.HasKey(p => p.BusinessEntityID);
 
             return modelBuilder;
         }
@@ -60,7 +60,31 @@ namespace OrderViewer.Models
 
             entity.ToTable("Store", "Sales");
 
-            entity.HasKey(p => new { p.BusinessEntityID });
+            entity.HasKey(p => p.BusinessEntityID);
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapSalesPerson(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<SalesPerson>();
+
+            entity.ToTable("SalesPerson", "Sales");
+
+            entity.HasKey(p => p.BusinessEntityID);
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapProduct(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<Product>();
+
+            entity.ToTable("Product", "Production");
+
+            entity.HasKey(p => p.ProductID);
+
+            entity.Property(p => p.ProductID).UseSqlServerIdentityColumn();
 
             return modelBuilder;
         }

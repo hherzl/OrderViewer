@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OrderViewer.ViewModels;
 
 namespace OrderViewer.Models
@@ -66,6 +67,23 @@ namespace OrderViewer.Models
             }
 
             return query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        }
+
+        public OrderHeaderViewModel GetOrder(Int32 orderID)
+        {
+            var entity = DbContext
+                .Set<SalesOrderHeader>()
+                .Include(p => p.CustomerFk.PersonFk)
+                .Include(p => p.CustomerFk.StoreFk)
+                .Include(p => p.SalesPersonFk)
+                .Include(p => p.SalesOrderDetails)
+                    .ThenInclude(p => p.ProductFk)
+                .FirstOrDefault(item => item.SalesOrderID == orderID);
+
+            return entity == null ? null : new OrderHeaderViewModel(entity)
+            {
+                OrderDetails = new List<OrderDetailViewModel>(entity.SalesOrderDetails.Select(item => new OrderDetailViewModel(item)))
+            };
         }
     }
 }
