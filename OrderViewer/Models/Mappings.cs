@@ -14,6 +14,10 @@ namespace OrderViewer.Models
 
             entity.Property(p => p.SalesOrderID).UseSqlServerIdentityColumn();
 
+            entity.HasOne(p => p.BillAddressFk).WithMany(p => p.BillingOrders).HasForeignKey(p => p.BillToAddressID);
+
+            entity.HasOne(p => p.ShipAddressFk).WithMany(p => p.ShippingOrders).HasForeignKey(p => p.ShipToAddressID);
+
             return modelBuilder;
         }
 
@@ -85,6 +89,45 @@ namespace OrderViewer.Models
             entity.HasKey(p => p.ProductID);
 
             entity.Property(p => p.ProductID).UseSqlServerIdentityColumn();
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapAddress(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<Address>();
+
+            entity.ToTable("Address", "Person");
+
+            entity.HasKey(p => p.AddressID);
+
+            entity.Property(p => p.AddressID).UseSqlServerIdentityColumn();
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapShipMethod(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<ShipMethod>();
+
+            entity.ToTable("ShipMethod", "Purchasing");
+
+            entity.HasKey(p => p.ShipMethodID);
+
+            entity.Property(p => p.ShipMethodID).UseSqlServerIdentityColumn();
+
+            return modelBuilder;
+        }
+
+        public static ModelBuilder MapSalesTerritory(this ModelBuilder modelBuilder)
+        {
+            var entity = modelBuilder.Entity<SalesTerritory>();
+
+            entity.ToTable("SalesTerritory", "Sales");
+
+            entity.HasKey(p => p.TerritoryID);
+
+            entity.Property(p => p.TerritoryID).UseSqlServerIdentityColumn();
 
             return modelBuilder;
         }

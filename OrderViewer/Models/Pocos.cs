@@ -5,11 +5,6 @@ namespace OrderViewer.Models
 {
     public class SalesOrderHeader
     {
-        public SalesOrderHeader()
-        {
-            SalesOrderDetails = new Collection<SalesOrderDetail>();
-        }
-
         public Int32? SalesOrderID { get; set; }
 
         public Byte? RevisionNumber { get; set; }
@@ -65,6 +60,14 @@ namespace OrderViewer.Models
         public virtual Customer CustomerFk { get; set; }
 
         public virtual SalesPerson SalesPersonFk { get; set; }
+
+        public virtual SalesTerritory SalesTerritoryFk { get; set; }
+
+        public virtual Address BillAddressFk { get; set; }
+
+        public virtual Address ShipAddressFk { get; set; }
+
+        public virtual ShipMethod ShipMethodFk { get; set; }
 
         public virtual Collection<SalesOrderDetail> SalesOrderDetails { get; set; }
     }
@@ -180,6 +183,8 @@ namespace OrderViewer.Models
         public Guid? Rowguid { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        public virtual Person PersonFk { get; set; }
     }
 
     public class Product
@@ -207,6 +212,67 @@ namespace OrderViewer.Models
         public DateTime? SellStartDate { get; set; }
 
         public Guid? rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class Address
+    {
+        public Int32? AddressID { get; set; }
+
+        public String AddressLine1 { get; set; }
+
+        public String AddressLine2 { get; set; }
+
+        public String City { get; set; }
+
+        public Int32? StateProvinceID { get; set; }
+
+        public String PostalCode { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+
+        public virtual Collection<SalesOrderHeader> BillingOrders { get; set; }
+
+        public virtual Collection<SalesOrderHeader> ShippingOrders { get; set; }
+    }
+
+    public class ShipMethod
+    {
+        public Int32? ShipMethodID { get; set; }
+
+        public String Name { get; set; }
+
+        public Decimal? ShipBase { get; set; }
+
+        public Decimal? ShipRate { get; set; }
+
+        public Guid? Rowguid { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+    }
+
+    public class SalesTerritory
+    {
+        public Int32? TerritoryID { get; set; }
+
+        public String Name { get; set; }
+
+        public String CountryRegionCode { get; set; }
+
+        public String Group { get; set; }
+
+        public Decimal? SalesYTD { get; set; }
+
+        public Decimal? SalesLastYear { get; set; }
+
+        public Decimal? CostYTD { get; set; }
+
+        public Decimal? CostLastYear { get; set; }
+
+        public Guid? Rowguid { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
     }

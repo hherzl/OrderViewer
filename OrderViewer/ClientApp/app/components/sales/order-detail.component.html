@@ -1,24 +1,126 @@
 ﻿<h2>Order Detail</h2>
 
+<style>
+    .dl-horizontal dt {
+        clear: left;
+        float: left;
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        width: 170px;
+        white-space: nowrap;
+  }
+</style>
+
 <div *ngIf="result">
     <div>
         <dl class="dl-horizontal">
-            <dt>Order date</dt>
-            <dd>{{ result.model.orderDate }}</dd>
+            <dt>Revision Number</dt>
+            <dd>{{ result.model.revisionNumber }}</dd>
 
-            <dt></dt>
-            <dd></dd>
+            <dt>Order Date</dt>
+            <dd>{{ result.model.orderDate | date: "short" }}</dd>
+
+            <dt>Due Date</dt>
+            <dd>{{ result.model.dueDate | date: "short" }}</dd>
+
+            <dt>Ship Date</dt>
+            <dd>{{ result.model.shipDate | date: "short" }}</dd>
+
+            <dt>Sales Order Number</dt>
+            <dd>{{ result.model.salesOrderNumber }}</dd>
+
+            <dt>Purchase Order Number</dt>
+            <dd>{{ result.model.purchaseOrderNumber }}</dd>
+
+            <dt>Account Number</dt>
+            <dd>{{ result.model.accountNumber }}</dd>
+
+            <dt>Customer Name</dt>
+            <dd>{{ result.model.customerName }}</dd>
+
+            <dt>Store Name</dt>
+            <dd>{{ result.model.storeName }}</dd>
+
+            <dt>Sales Person Name</dt>
+            <dd>{{ result.model.salesPersonName }}</dd>
+
+            <dt>Territory Name</dt>
+            <dd>{{ result.model.territoryName }}</dd>
+
+            <dt>Ship Method</dt>
+            <dd>{{ result.model.shipMethodName }}</dd>
+
+            <dt>Sub Total</dt>
+            <dd>{{ result.model.subTotal | currency }}</dd>
+
+            <dt>Tax Amt</dt>
+            <dd>{{ result.model.taxAmt | currency }}</dd>
+
+            <dt>Freight</dt>
+            <dd>{{ result.model.freight | currency }}</dd>
+
+            <dt>Total Due</dt>
+            <dd>{{ result.model.totalDue | currency }}</dd>
+
+            <dt>Comment</dt>
+            <dd>{{ result.model.comment }}</dd>
+
+            <dt>Modified Date</dt>
+            <dd>{{ result.model.modifiedDate | date: "short" }}</dd>
         </dl>
     </div>
+
+    <h3>Billing & Shipping</h3>
+
+    <table class="table table-hover">
+        <tr>
+            <th colspan="2">Bill Address</th>
+            <th colspan="2">Ship Address</th>
+        </tr>
+        <tr>
+            <td>Address line 1</td>
+            <td>{{ result.model.billAddress.addressLine1 }}</td>
+            <td>Address line 1</td>
+            <td>{{ result.model.shipAddress.addressLine1 }}</td>
+        </tr>
+        <tr>
+            <td>Address line 2</td>
+            <td>{{ result.model.billAddress.addressLine2 }}</td>
+            <td>Address line 2</td>
+            <td>{{ result.model.shipAddress.addressLine2 }}</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>{{ result.model.billAddress.city }}</td>
+            <td>City</td>
+            <td>{{ result.model.shipAddress.city }}</td>
+        </tr>
+        <tr>
+            <td>Postal code</td>
+            <td>{{ result.model.billAddress.postalCode }}</td>
+            <td>Postal code</td>
+            <td>{{ result.model.shipAddress.postalCode }}</td>
+        </tr>
+    </table>
 
     <h3>Details</h3>
 
     <table class="table table-hover">
         <tr>
             <th>Product name</th>
-            <th style="text-align: right;">Unit price</th>
-            <th style="text-align: right;">Quantity</th>
-            <th style="text-align: right;">Line total</th>
+            <th style="text-align: right;">
+                Unit price
+            </th>
+            <th style="text-align: right;">
+                Quantity
+            </th>
+            <th style="text-align: right;">
+                Unit price discount
+            </th>
+            <th style="text-align: right;">
+                Line total
+            </th>
         </tr>
         <tr *ngFor="let item of result.model.orderDetails">
             <td>
@@ -31,7 +133,21 @@
                 {{ item.orderQty }}
             </td>
             <td style="text-align: right;">
+                {{ item.unitPriceDiscount }}
+            </td>
+            <td style="text-align: right;">
                 {{ item.lineTotal | currency }}
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;">
+                <strong>
+                    {{ result.model.total | currency }}
+                </strong>
             </td>
         </tr>
     </table>

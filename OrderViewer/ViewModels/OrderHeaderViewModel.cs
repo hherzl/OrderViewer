@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OrderViewer.Models;
 
 namespace OrderViewer.ViewModels
@@ -18,26 +19,17 @@ namespace OrderViewer.ViewModels
             SalesOrderNumber = entity.SalesOrderNumber;
             PurchaseOrderNumber = entity.PurchaseOrderNumber;
             AccountNumber = entity.AccountNumber;
-            CustomerID = entity.CustomerID;
-            if (entity.CustomerFk != null)
-            {
-                CustomerName = entity.CustomerFk.PersonFk.FirstName + (entity.CustomerFk.PersonFk.MiddleName == null ? String.Empty : " " + entity.CustomerFk.PersonFk.MiddleName + " ") + " " + entity.CustomerFk.PersonFk.LastName + (entity.CustomerFk.StoreFk == null ? String.Empty : " (" + entity.CustomerFk.StoreFk.Name + ")");
-            }
-            SalesPersonID = entity.SalesPersonID;
-            SalesPersonName = "";
-            TerritoryID = entity.TerritoryID;
-            BillToAddressID = entity.BillToAddressID;
-            ShipToAddressID = entity.ShipToAddressID;
-            ShipMethodID = entity.ShipMethodID;
-            CreditCardID = entity.CreditCardID;
-            CreditCardApprovalCode = entity.CreditCardApprovalCode;
+            CustomerName = entity.CustomerFk?.PersonFk?.FirstName + (entity.CustomerFk.PersonFk?.MiddleName == null ? String.Empty : " " + entity.CustomerFk?.PersonFk?.MiddleName) + " " + entity.CustomerFk?.PersonFk?.LastName;
+            StoreName = entity.CustomerFk?.StoreFk?.Name;
+            SalesPersonName = entity.SalesPersonFk == null ? String.Empty : entity.SalesPersonFk.PersonFk?.FirstName + (entity.SalesPersonFk.PersonFk?.MiddleName == null ? String.Empty : " " + entity.SalesPersonFk.PersonFk?.MiddleName) + " " + entity.SalesPersonFk.PersonFk?.LastName;
+            TerritoryName = entity.SalesTerritoryFk.Name;
+            ShipMethodName = entity.ShipMethodFk.Name;
             CurrencyRateID = entity.CurrencyRateID;
-            SubTotal = entity.CurrencyRateID;
+            SubTotal = entity.SubTotal;
             TaxAmt = entity.TaxAmt;
             Freight = entity.Freight;
             TotalDue = entity.TotalDue;
             Comment = entity.Comment;
-            Rowguid = entity.Rowguid;
             ModifiedDate = entity.ModifiedDate;
         }
 
@@ -61,25 +53,15 @@ namespace OrderViewer.ViewModels
 
         public String AccountNumber { get; set; }
 
-        public Int32? CustomerID { get; set; }
-
         public String CustomerName { get; set; }
 
-        public Int32? SalesPersonID { get; set; }
+        public String StoreName { get; set; }
 
         public String SalesPersonName { get; set; }
 
-        public Int32? TerritoryID { get; set; }
+        public String TerritoryName { get; set; }
 
-        public Int32? BillToAddressID { get; set; }
-
-        public Int32? ShipToAddressID { get; set; }
-
-        public Int32? ShipMethodID { get; set; }
-
-        public Int32? CreditCardID { get; set; }
-
-        public String CreditCardApprovalCode { get; set; }
+        public String ShipMethodName { get; set; }
 
         public Int32? CurrencyRateID { get; set; }
 
@@ -93,10 +75,20 @@ namespace OrderViewer.ViewModels
 
         public String Comment { get; set; }
 
-        public Guid? Rowguid { get; set; }
-
         public DateTime? ModifiedDate { get; set; }
 
+        public AddressViewModel BillAddress { get; set; }
+
+        public AddressViewModel ShipAddress { get; set; }
+
         public IEnumerable<OrderDetailViewModel> OrderDetails { get; set; }
+
+        public Decimal? Total
+        {
+            get
+            {
+                return OrderDetails == null ? 0 : OrderDetails.Sum(item => item.LineTotal);
+            }
+        }
     }
 }

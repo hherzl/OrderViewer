@@ -76,12 +76,18 @@ namespace OrderViewer.Models
                 .Include(p => p.CustomerFk.PersonFk)
                 .Include(p => p.CustomerFk.StoreFk)
                 .Include(p => p.SalesPersonFk)
+                .Include(p => p.SalesTerritoryFk)
+                .Include(p => p.ShipMethodFk)
+                .Include(p => p.BillAddressFk)
+                .Include(p => p.ShipAddressFk)
                 .Include(p => p.SalesOrderDetails)
                     .ThenInclude(p => p.ProductFk)
                 .FirstOrDefault(item => item.SalesOrderID == orderID);
 
             return entity == null ? null : new OrderHeaderViewModel(entity)
             {
+                BillAddress = new AddressViewModel(entity.BillAddressFk),
+                ShipAddress = new AddressViewModel(entity.ShipAddressFk),
                 OrderDetails = new List<OrderDetailViewModel>(entity.SalesOrderDetails.Select(item => new OrderDetailViewModel(item)))
             };
         }
