@@ -41,7 +41,8 @@ namespace OrderViewer.Controllers
 
                 response.Model = await Task.Run(() =>
                 {
-                    return SalesRepository.GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName);
+                    return SalesRepository
+                        .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName);
                 });
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());

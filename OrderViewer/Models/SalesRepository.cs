@@ -34,10 +34,10 @@ namespace OrderViewer.Models
             var query =
                 from orderHeader in DbContext.Set<SalesOrderHeader>()
                 join customer in DbContext.Set<Customer>() on orderHeader.CustomerID equals customer.CustomerID
-                join customerPersonJoin in DbContext.Set<Person>() on customer.PersonID equals customerPersonJoin.BusinessEntityID into customerPersonTemp
-                from customerPerson in customerPersonTemp.Where(relation => relation.BusinessEntityID == customer.PersonID).DefaultIfEmpty()
-                join customerStoreJoin in DbContext.Set<Store>() on customer.StoreID equals customerStoreJoin.BusinessEntityID into customerStoreTemp
-                from customerStore in customerStoreTemp.Where(relation => relation.BusinessEntityID == customer.StoreID).DefaultIfEmpty()
+                join customerPersonJoin in DbContext.Set<Person>() on customer.PersonID equals customerPersonJoin.BusinessEntityID
+                        into customerPersonTemp from customerPerson in customerPersonTemp.Where(relation => relation.BusinessEntityID == customer.PersonID).DefaultIfEmpty()
+                join customerStoreJoin in DbContext.Set<Store>() on customer.StoreID equals customerStoreJoin.BusinessEntityID
+                        into customerStoreTemp from customerStore in customerStoreTemp.Where(relation => relation.BusinessEntityID == customer.StoreID).DefaultIfEmpty()
                 select new OrderSummaryViewModel
                 {
                     SalesOrderID = orderHeader.SalesOrderID,
