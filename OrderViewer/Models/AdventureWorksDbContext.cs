@@ -6,12 +6,15 @@ namespace OrderViewer.Models
 {
     public class AdventureWorksDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public AdventureWorksDbContext(IOptions<AppSettings> appSettings)
+        public AdventureWorksDbContext(IOptions<AppSettings> appSettings, IEntityMapper entityMapper)
         {
             ConnectionString = appSettings.Value.ConnectionString;
+            EntityMapper = entityMapper;
         }
 
         public String ConnectionString { get; }
+
+        public IEntityMapper EntityMapper { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,17 +25,7 @@ namespace OrderViewer.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                .MapSalesOrderHeader()
-                .MapAddress()
-                .MapShipMethod()
-                .MapCustomer()
-                .MapPerson()
-                .MapStore()
-                .MapSalesPerson()
-                .MapSalesTerritory()
-                .MapSalesOrderDetail()
-                .MapProduct();
+            EntityMapper.MapEntities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

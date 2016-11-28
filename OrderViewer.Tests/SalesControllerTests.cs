@@ -20,7 +20,9 @@ namespace Tests
                     ConnectionString = "server=(local);database=AdventureWorks2012;integrated security=yes;"
                 });
 
-                return new SalesRepository(new AdventureWorksDbContext(appSettings)) as ISalesRepository;
+                var entityMapper = new AdventureWorksEntityMapper() as IEntityMapper;
+
+                return new SalesRepository(new AdventureWorksDbContext(appSettings, entityMapper)) as ISalesRepository;
             }
         }
 

@@ -30,6 +30,7 @@ namespace OrderViewer
 
             services.AddEntityFrameworkSqlServer().AddDbContext<AdventureWorksDbContext>();
 
+            services.AddScoped<IEntityMapper, AdventureWorksEntityMapper>();
             services.AddScoped<ISalesRepository, SalesRepository>();
 
             services.AddOptions();
