@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.DataContracts;
 using OrderViewer.Extensions;
-using OrderViewer.Models;
 using OrderViewer.Responses;
-using OrderViewer.ViewModels;
 
 namespace OrderViewer.Controllers
 {

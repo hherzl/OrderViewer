@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using OrderViewer.Models;
+using OrderViewer.Core;
+using OrderViewer.Core.DataLayer;
+using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.Mapping;
 
 namespace OrderViewer
 {

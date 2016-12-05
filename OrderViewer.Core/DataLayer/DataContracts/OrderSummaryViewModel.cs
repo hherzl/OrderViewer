@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderViewer.ViewModels
+namespace OrderViewer.Core.DataLayer.DataContracts
 {
     public class OrderSummaryViewModel
     {

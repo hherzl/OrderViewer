@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderViewer.Models
+namespace OrderViewer.Core.DataLayer
 {
     public class AppSettings
     {

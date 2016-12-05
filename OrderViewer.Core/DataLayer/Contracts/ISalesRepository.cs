@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using OrderViewer.ViewModels;
+using OrderViewer.Core.DataLayer.DataContracts;
 
-namespace OrderViewer.Models
+namespace OrderViewer.Core.DataLayer.Contracts
 {
     public interface ISalesRepository : IDisposable
     {

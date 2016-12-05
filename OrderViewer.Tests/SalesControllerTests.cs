@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OrderViewer.Controllers;
-using OrderViewer.Models;
+using OrderViewer.Core;
+using OrderViewer.Core.DataLayer;
+using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.DataContracts;
+using OrderViewer.Core.DataLayer.Mapping;
 using OrderViewer.Responses;
-using OrderViewer.ViewModels;
 using Xunit;
 
 namespace Tests

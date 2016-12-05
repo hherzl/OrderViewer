@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using OrderViewer.Core.DataLayer.Mapping;
 
-namespace OrderViewer.Models
+namespace OrderViewer.Core.DataLayer
 {
     public class AdventureWorksDbContext : Microsoft.EntityFrameworkCore.DbContext
     {

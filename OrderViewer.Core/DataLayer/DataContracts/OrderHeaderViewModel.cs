@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OrderViewer.Models;
+using OrderViewer.Core.EntityLayer;
 
-namespace OrderViewer.ViewModels
+namespace OrderViewer.Core.DataLayer.DataContracts
 {
     public class OrderHeaderViewModel
     {

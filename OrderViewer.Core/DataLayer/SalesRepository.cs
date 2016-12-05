@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using OrderViewer.ViewModels;
+using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.DataContracts;
+using OrderViewer.Core.EntityLayer;
 
-namespace OrderViewer.Models
+namespace OrderViewer.Core.DataLayer
 {
     public class SalesRepository : ISalesRepository
     {
