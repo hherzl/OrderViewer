@@ -18,6 +18,8 @@ namespace OrderViewer.Core.DataLayer.DataContracts
 
         public String CustomerName { get; set; }
 
+        public String StoreName { get; set; }
+
         public Int32 Lines { get; set; }
 
         public Decimal? TotalDue { get; set; }

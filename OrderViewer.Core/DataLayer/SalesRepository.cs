@@ -35,10 +35,13 @@ namespace OrderViewer.Core.DataLayer
         {
             var query =
                 from orderHeader in DbContext.Set<SalesOrderHeader>()
-                join customer in DbContext.Set<Customer>() on orderHeader.CustomerID equals customer.CustomerID
-                join customerPersonJoin in DbContext.Set<Person>() on customer.PersonID equals customerPersonJoin.BusinessEntityID
+                join customer in DbContext.Set<Customer>()
+                    on orderHeader.CustomerID equals customer.CustomerID
+                join customerPersonJoin in DbContext.Set<Person>()
+                    on customer.PersonID equals customerPersonJoin.BusinessEntityID
                         into customerPersonTemp from customerPerson in customerPersonTemp.Where(relation => relation.BusinessEntityID == customer.PersonID).DefaultIfEmpty()
-                join customerStoreJoin in DbContext.Set<Store>() on customer.StoreID equals customerStoreJoin.BusinessEntityID
+                join customerStoreJoin in DbContext.Set<Store>()
+                    on customer.StoreID equals customerStoreJoin.BusinessEntityID
                         into customerStoreTemp from customerStore in customerStoreTemp.Where(relation => relation.BusinessEntityID == customer.StoreID).DefaultIfEmpty()
                 select new OrderSummaryViewModel
                 {
@@ -48,7 +51,8 @@ namespace OrderViewer.Core.DataLayer
                     ShipDate = orderHeader.ShipDate,
                     SalesOrderNumber = orderHeader.SalesOrderNumber,
                     CustomerID = orderHeader.CustomerID,
-                    CustomerName = customerPerson.FirstName + (customerPerson.MiddleName == null ? String.Empty : " " + customerPerson.MiddleName) + " " + customerPerson.LastName + (customerStore == null ? String.Empty : " (" + customerStore.Name + ")"),
+                    CustomerName = customerPerson.FirstName + (customerPerson.MiddleName == null ? String.Empty : " " + customerPerson.MiddleName) + " " + customerPerson.LastName,
+                    StoreName = customerStore == null ? String.Empty : customerStore.Name,
                     Lines = orderHeader.SalesOrderDetails.Count(),
                     TotalDue = orderHeader.TotalDue
                 };

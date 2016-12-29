@@ -42,17 +42,33 @@
         <th>Due Date</th>
         <th>Sales Order #</th>
         <th>Customer</th>
+        <th>Store</th>
         <th>Total Due</th>
         <th>Lines</th>
         <th></th>
     </tr>
     <tr *ngFor="let item of result.model">
-        <td>{{ item.salesOrderID }}</td>
-        <td>{{ item.orderDate | date: "shortDate" }}</td>
-        <td>{{ item.shipDate | date: "shortDate" }}</td>
-        <td>{{ item.dueDate | date: "shortDate" }}</td>
-        <td>{{ item.salesOrderNumber }}</td>
-        <td>{{ item.customerName }}</td>
+        <td>
+            {{ item.salesOrderID }}
+        </td>
+        <td>
+            {{ item.orderDate | date: "shortDate" }}
+        </td>
+        <td>
+            {{ item.shipDate | date: "shortDate" }}
+        </td>
+        <td>
+            {{ item.dueDate | date: "shortDate" }}
+        </td>
+        <td>
+            {{ item.salesOrderNumber }}
+        </td>
+        <td>
+            {{ item.customerName }}
+        </td>
+        <td>
+            {{ item.storeName }}
+        </td>
         <td style="text-align: right;">
             {{ item.totalDue | currency }}
         </td>

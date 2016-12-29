@@ -30,7 +30,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrders_Async()
+        public async Task TestGetOrdersAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);
@@ -45,7 +45,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrdersSearchingBySalesOrderNumber_Async()
+        public async Task TestGetOrdersSearchingBySalesOrderNumberAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);
@@ -62,7 +62,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrdersSearchingByCustomerName_Async()
+        public async Task TestGetOrdersSearchingByCustomerNameAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);
@@ -79,7 +79,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrdersSearchingBySalesOrderNumberAndCustomerName_Async()
+        public async Task TestGetOrdersSearchingBySalesOrderNumberAndCustomerNameAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);
@@ -97,7 +97,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrder_Async()
+        public async Task TestGetOrderAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);
@@ -114,7 +114,7 @@ namespace Tests
         }
 
         [Fact]
-        public async Task TestGetOrderNotFound_Async()
+        public async Task TestGetOrderNotFoundAsync()
         {
             // Arrange
             var controller = new SalesController(SalesRepository);

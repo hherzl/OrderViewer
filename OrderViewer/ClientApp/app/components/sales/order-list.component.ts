@@ -9,13 +9,13 @@ import { SalesService } from "../../services/sales.service";
     template: require("./order-list.component.html")
 })
 export class OrderListComponent implements OnInit {
+    public pageNumber: number;
+    public pageSize: number;
     public salesOrderNumber: string;
     public customerName: string;
-    public pageSize: number;
     public result: IListResponse<OrderSummary>;
 
     constructor(private router: Router, private service: SalesService) {
-        
     }
 
     ngOnInit(): void {
@@ -23,9 +23,11 @@ export class OrderListComponent implements OnInit {
     }
 
     search(): void {
-        this.service.getOrders(this.pageSize, this.salesOrderNumber, this.customerName).subscribe(result => {
-            this.result = result.json();
-        });
+        this.service
+            .getOrders(this.pageNumber, this.pageSize, this.salesOrderNumber, this.customerName)
+            .subscribe(result => {
+                this.result = result.json();
+            });
     }
 
     details(order: OrderSummary): void {
