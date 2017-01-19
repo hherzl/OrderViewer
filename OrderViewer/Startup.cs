@@ -35,6 +35,7 @@ namespace OrderViewer
 
             services.AddScoped<IEntityMapper, AdventureWorksEntityMapper>();
             services.AddScoped<ISalesRepository, SalesRepository>();
+            services.AddScoped<IProductionRepository, ProductionRepository>();
 
             services.AddOptions();
 

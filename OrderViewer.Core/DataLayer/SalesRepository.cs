@@ -8,27 +8,11 @@ using OrderViewer.Core.EntityLayer;
 
 namespace OrderViewer.Core.DataLayer
 {
-    public class SalesRepository : ISalesRepository
+    public class SalesRepository : Repository, ISalesRepository
     {
-        private readonly AdventureWorksDbContext DbContext;
-        private Boolean Disposed;
-
         public SalesRepository(AdventureWorksDbContext dbContext)
+            : base(dbContext)
         {
-            DbContext = dbContext;
-        }
-
-        public void Dispose()
-        {
-            if (!Disposed)
-            {
-                if (DbContext != null)
-                {
-                    DbContext.Dispose();
-
-                    Disposed = true;
-                }
-            }
         }
 
         public IEnumerable<OrderSummaryViewModel> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)

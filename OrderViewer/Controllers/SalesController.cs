@@ -21,10 +21,7 @@ namespace OrderViewer.Controllers
 
         protected override void Dispose(Boolean disposing)
         {
-            if (SalesRepository != null)
-            {
-                SalesRepository.Dispose();
-            }
+            SalesRepository?.Dispose();
 
             base.Dispose(disposing);
         }

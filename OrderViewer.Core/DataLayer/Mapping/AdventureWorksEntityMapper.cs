@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using OrderViewer.Core.DataLayer.Mapping;
 
-namespace OrderViewer.Core
+namespace OrderViewer.Core.DataLayer.Mapping
 {
     public class AdventureWorksEntityMapper : EntityMapper
     {
@@ -18,7 +17,8 @@ namespace OrderViewer.Core
                 new SalesPersonMap() as IEntityMap,
                 new SalesTerritoryMap() as IEntityMap,
                 new SalesOrderDetailMap() as IEntityMap,
-                new ProductMap() as IEntityMap
+                new ProductMap() as IEntityMap,
+                new ProductSubcategoryMap() as IEntityMap
             };
         }
     }

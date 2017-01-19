@@ -7,7 +7,9 @@ import { NavMenuComponent } from "./components/navmenu/navmenu.component";
 import { HomeComponent } from "./components/home/home.component";
 import { OrderListComponent } from "./components/sales/order-list.component";
 import { OrderDetailComponent } from "./components/sales/order-detail.component";
+import { ProductSubcategoryListComponent } from "./components/production/product-subcategory-list.component";
 import { SalesService } from "./services/sales.service";
+import { ProductionService } from "./services/production.service";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -16,6 +18,7 @@ import { SalesService } from "./services/sales.service";
         NavMenuComponent,
         OrderListComponent,
         OrderDetailComponent,
+        ProductSubcategoryListComponent,
         HomeComponent
     ],
     imports: [
@@ -26,11 +29,13 @@ import { SalesService } from "./services/sales.service";
             { path: "home", component: HomeComponent },
             { path: "order", component: OrderListComponent },
             { path: "order-detail/:id", component: OrderDetailComponent },
+            { path: "productSubcategory", component: ProductSubcategoryListComponent },
             { path: "**", redirectTo: "home" }
         ])
     ],
     providers: [
-        SalesService
+        SalesService,
+        ProductionService
     ]
 })
 export class AppModule {
