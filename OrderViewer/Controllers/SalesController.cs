@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderViewer.Core.DataLayer.Contracts;
-using OrderViewer.Core.DataLayer.DataContracts;
 using OrderViewer.Extensions;
 using OrderViewer.Responses;
+using OrderViewer.ViewModels;
 
 namespace OrderViewer.Controllers
 {
@@ -47,7 +47,8 @@ namespace OrderViewer.Controllers
                 response.Model = await Task.Run(() =>
                 {
                     return SalesRepository
-                        .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName);
+                        .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName)
+                        .Select(item => item.ToOrderSummaryViewModel());
                 });
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
@@ -75,7 +76,7 @@ namespace OrderViewer.Controllers
             {
                 response.Model = await Task.Run(() =>
                 {
-                    return SalesRepository.GetOrder(id);
+                    return SalesRepository.GetOrder(id).ToOrderHeaderViewModel();
                 });
             }
             catch (Exception ex)

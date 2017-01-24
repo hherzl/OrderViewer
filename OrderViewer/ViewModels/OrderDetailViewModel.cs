@@ -1,7 +1,7 @@
 ﻿using System;
 using OrderViewer.Core.EntityLayer;
 
-namespace OrderViewer.Core.DataLayer.DataContracts
+namespace OrderViewer.ViewModels
 {
     public class OrderDetailViewModel
     {

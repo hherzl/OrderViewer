@@ -9,6 +9,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using OrderViewer.Core.DataLayer;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.DataLayer.Mapping;
+using OrderViewer.Core.DataLayer.Repositories;
 using Swashbuckle.Swagger.Model;
 
 namespace OrderViewer

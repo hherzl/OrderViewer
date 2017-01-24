@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using OrderViewer.Core.DataLayer.DataContracts;
+using OrderViewer.Core.EntityLayer;
 
 namespace OrderViewer.Core.DataLayer.Contracts
 {
-    public interface ISalesRepository : IDisposable
+    public interface ISalesRepository : IRepository
     {
-        IEnumerable<OrderSummaryViewModel> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName);
+        IEnumerable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName);
 
-        OrderHeaderViewModel GetOrder(Int32 orderID);
+        SalesOrderHeader GetOrder(Int32 orderID);
     }
 }

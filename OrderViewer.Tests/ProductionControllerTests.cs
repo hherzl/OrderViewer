@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderViewer.Controllers;
-using OrderViewer.Core.DataLayer.DataContracts;
 using OrderViewer.Responses;
+using OrderViewer.ViewModels;
 using Xunit;
 
 namespace OrderViewer.Tests

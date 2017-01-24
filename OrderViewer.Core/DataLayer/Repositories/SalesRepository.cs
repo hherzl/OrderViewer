@@ -6,7 +6,7 @@ using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.DataLayer.DataContracts;
 using OrderViewer.Core.EntityLayer;
 
-namespace OrderViewer.Core.DataLayer
+namespace OrderViewer.Core.DataLayer.Repositories
 {
     public class SalesRepository : Repository, ISalesRepository
     {
@@ -15,7 +15,7 @@ namespace OrderViewer.Core.DataLayer
         {
         }
 
-        public IEnumerable<OrderSummaryViewModel> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)
+        public IEnumerable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)
         {
             var query =
                 from orderHeader in DbContext.Set<SalesOrderHeader>()
@@ -23,11 +23,13 @@ namespace OrderViewer.Core.DataLayer
                     on orderHeader.CustomerID equals customer.CustomerID
                 join customerPersonJoin in DbContext.Set<Person>()
                     on customer.PersonID equals customerPersonJoin.BusinessEntityID
-                        into customerPersonTemp from customerPerson in customerPersonTemp.Where(relation => relation.BusinessEntityID == customer.PersonID).DefaultIfEmpty()
+                        into customerPersonTemp
+                from customerPerson in customerPersonTemp.Where(relation => relation.BusinessEntityID == customer.PersonID).DefaultIfEmpty()
                 join customerStoreJoin in DbContext.Set<Store>()
                     on customer.StoreID equals customerStoreJoin.BusinessEntityID
-                        into customerStoreTemp from customerStore in customerStoreTemp.Where(relation => relation.BusinessEntityID == customer.StoreID).DefaultIfEmpty()
-                select new OrderSummaryViewModel
+                        into customerStoreTemp
+                from customerStore in customerStoreTemp.Where(relation => relation.BusinessEntityID == customer.StoreID).DefaultIfEmpty()
+                select new OrderSummary
                 {
                     SalesOrderID = orderHeader.SalesOrderID,
                     OrderDate = orderHeader.OrderDate,
@@ -59,7 +61,7 @@ namespace OrderViewer.Core.DataLayer
             return query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         }
 
-        public OrderHeaderViewModel GetOrder(Int32 orderID)
+        public SalesOrderHeader GetOrder(Int32 orderID)
         {
             var entity = DbContext
                 .Set<SalesOrderHeader>()
@@ -74,12 +76,7 @@ namespace OrderViewer.Core.DataLayer
                     .ThenInclude(p => p.ProductFk)
                 .FirstOrDefault(item => item.SalesOrderID == orderID);
 
-            return entity == null ? null : new OrderHeaderViewModel(entity)
-            {
-                BillAddress = new AddressViewModel(entity.BillAddressFk),
-                ShipAddress = new AddressViewModel(entity.ShipAddressFk),
-                OrderDetails = new List<OrderDetailViewModel>(entity.SalesOrderDetails.Select(item => new OrderDetailViewModel(item)))
-            };
+            return entity;
         }
     }
 }

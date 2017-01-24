@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrderViewer.Core.DataLayer
+namespace OrderViewer.Core.DataLayer.Repositories
 {
     public abstract class Repository
     {
