@@ -26,6 +26,12 @@ namespace OrderViewer.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Retrieve the product subcategories
+        /// </summary>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <returns>A ListModelResponse of ProductSubcategoryViewModel</returns>
         [HttpGet("ProductSubcategory")]
         public async Task<IActionResult> GetProductSubcategories(Int32? pageSize = 10, Int32? pageNumber = 1)
         {

@@ -26,6 +26,14 @@ namespace OrderViewer.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Retrieves a list of orders that match with criteria
+        /// </summary>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="pageNumber">Page number</param>
+        /// <param name="salesOrderNumber">Sales order number</param>
+        /// <param name="customerName">Customer name</param>
+        /// <returns>A ListModelResponse of OrderSummaryViewModel</returns>
         [HttpGet("Order")]
         public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
         {
@@ -53,6 +61,11 @@ namespace OrderViewer.Controllers
             return response.ToHttpResponse();
         }
 
+        /// <summary>
+        /// Retrieves an existing order by id
+        /// </summary>
+        /// <param name="id">Order ID</param>
+        /// <returns>A SingleModelResponse of OrderHeaderViewModel</returns>
         [HttpGet("Order/{id}")]
         public async Task<IActionResult> GetOrder(Int32 id)
         {
