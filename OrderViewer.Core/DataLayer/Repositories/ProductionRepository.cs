@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.EntityLayer;
@@ -13,7 +12,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
         {
         }
 
-        public IEnumerable<ProductSubcategory> GetProductSubcategories(Int32 pageSize, Int32 pageNumber)
+        public IQueryable<ProductSubcategory> GetProductSubcategories(Int32 pageSize, Int32 pageNumber)
         {
             var query =
                 from productSubcategory in DbContext.Set<ProductSubcategory>()

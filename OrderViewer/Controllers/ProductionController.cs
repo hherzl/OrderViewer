@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Extensions;
 using OrderViewer.Responses;
@@ -42,12 +43,11 @@ namespace OrderViewer.Controllers
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
 
-                response.Model = await Task.Run(() =>
-                {
-                    return ProductionRepository
+                var list = await ProductionRepository
                         .GetProductSubcategories((Int32)pageSize, (Int32)pageNumber)
-                        .Select(item => item.ToProductSubcategoryViewModel());
-                });
+                        .ToListAsync();
+
+                response.Model = list.Select(item => item.ToProductSubcategoryViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.DataLayer.DataContracts;
@@ -15,7 +16,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
         {
         }
 
-        public IEnumerable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)
+        public IQueryable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)
         {
             var query =
                 from orderHeader in DbContext.Set<SalesOrderHeader>()
@@ -61,7 +62,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
             return query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         }
 
-        public SalesOrderHeader GetOrder(Int32 orderID)
+        public Task<SalesOrderHeader> GetOrderAsync(Int32 orderID)
         {
             var entity = DbContext
                 .Set<SalesOrderHeader>()
@@ -74,7 +75,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
                 .Include(p => p.ShipAddressFk)
                 .Include(p => p.SalesOrderDetails)
                     .ThenInclude(p => p.ProductFk)
-                .FirstOrDefault(item => item.SalesOrderID == orderID);
+                .FirstOrDefaultAsync(item => item.SalesOrderID == orderID);
 
             return entity;
         }

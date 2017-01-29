@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Extensions;
 using OrderViewer.Responses;
@@ -44,12 +45,11 @@ namespace OrderViewer.Controllers
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
 
-                response.Model = await Task.Run(() =>
-                {
-                    return SalesRepository
+                var list = await SalesRepository
                         .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName)
-                        .Select(item => item.ToOrderSummaryViewModel());
-                });
+                        .ToListAsync();
+
+                response.Model = list.Select(item => item.ToOrderSummaryViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
             }
@@ -74,10 +74,9 @@ namespace OrderViewer.Controllers
 
             try
             {
-                response.Model = await Task.Run(() =>
-                {
-                    return SalesRepository.GetOrder(id).ToOrderHeaderViewModel();
-                });
+                var entity = await SalesRepository.GetOrderAsync(id);
+
+                response.Model = entity.ToOrderHeaderViewModel();
             }
             catch (Exception ex)
             {

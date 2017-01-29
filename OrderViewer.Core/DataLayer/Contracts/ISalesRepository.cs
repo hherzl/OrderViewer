@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using OrderViewer.Core.DataLayer.DataContracts;
 using OrderViewer.Core.EntityLayer;
 
@@ -7,8 +8,8 @@ namespace OrderViewer.Core.DataLayer.Contracts
 {
     public interface ISalesRepository : IRepository
     {
-        IEnumerable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName);
+        IQueryable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName);
 
-        SalesOrderHeader GetOrder(Int32 orderID);
+        Task<SalesOrderHeader> GetOrderAsync(Int32 orderID);
     }
 }
