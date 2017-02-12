@@ -8,17 +8,17 @@ namespace OrderViewer.Core.DataLayer.Mapping
         {
             Mappings = new List<IEntityMap>()
             {
-                new SalesOrderHeaderMap() as IEntityMap,
-                new AddressMap() as IEntityMap,
-                new ShipMethodMap() as IEntityMap,
-                new CustomerMap() as IEntityMap,
-                new PersonMap() as IEntityMap,
-                new StoreMap() as IEntityMap,
-                new SalesPersonMap() as IEntityMap,
-                new SalesTerritoryMap() as IEntityMap,
-                new SalesOrderDetailMap() as IEntityMap,
-                new ProductMap() as IEntityMap,
-                new ProductSubcategoryMap() as IEntityMap
+                new SalesOrderHeaderMap(),
+                new AddressMap(),
+                new ShipMethodMap(),
+                new CustomerMap(),
+                new PersonMap(),
+                new StoreMap(),
+                new SalesPersonMap(),
+                new SalesTerritoryMap(),
+                new SalesOrderDetailMap(),
+                new ProductMap(),
+                new ProductSubcategoryMap()
             };
         }
     }

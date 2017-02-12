@@ -5,6 +5,10 @@ namespace OrderViewer.ViewModels
 {
     public class AddressViewModel
     {
+        public AddressViewModel()
+        {
+        }
+
         public AddressViewModel(Address entity)
         {
             AddressID = entity.AddressID;

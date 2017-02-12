@@ -5,7 +5,7 @@ namespace OrderViewer.Extensions
 {
     public static class ProductSubcategoryMapper
     {
-        public static ProductSubcategoryViewModel ToProductSubcategoryViewModel(this ProductSubcategory entity)
+        public static ProductSubcategoryViewModel ToViewModel(this ProductSubcategory entity)
         {
             return new ProductSubcategoryViewModel
             {

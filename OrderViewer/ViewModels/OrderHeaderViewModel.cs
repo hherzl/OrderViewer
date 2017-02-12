@@ -7,6 +7,10 @@ namespace OrderViewer.ViewModels
 {
     public class OrderHeaderViewModel
     {
+        public OrderHeaderViewModel()
+        {
+        }
+
         public OrderHeaderViewModel(SalesOrderHeader entity)
         {
             SalesOrderID = entity.SalesOrderID;

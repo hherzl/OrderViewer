@@ -20,7 +20,10 @@ namespace OrderViewer.Extensions
                 status = HttpStatusCode.NoContent;
             }
 
-            return new ObjectResult(response) { StatusCode = (Int32)status };
+            return new ObjectResult(response)
+            {
+                StatusCode = (Int32)status
+            };
         }
 
         public static IActionResult ToHttpResponse<TModel>(this ISingleModelResponse<TModel> response)
@@ -36,7 +39,10 @@ namespace OrderViewer.Extensions
                 status = HttpStatusCode.NotFound;
             }
 
-            return new ObjectResult(response) { StatusCode = (Int32)status };
+            return new ObjectResult(response)
+            {
+                StatusCode = (Int32)status
+            };
         }
     }
 }

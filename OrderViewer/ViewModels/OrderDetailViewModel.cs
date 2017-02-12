@@ -5,6 +5,10 @@ namespace OrderViewer.ViewModels
 {
     public class OrderDetailViewModel
     {
+        public OrderDetailViewModel()
+        {
+        }
+
         public OrderDetailViewModel(SalesOrderDetail entity)
         {
             SalesOrderID = entity.SalesOrderID;

@@ -47,7 +47,7 @@ namespace OrderViewer.Controllers
                         .GetProductSubcategories((Int32)pageSize, (Int32)pageNumber)
                         .ToListAsync();
 
-                response.Model = list.Select(item => item.ToProductSubcategoryViewModel());
+                response.Model = list.Select(item => item.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
             }

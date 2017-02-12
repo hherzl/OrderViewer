@@ -7,7 +7,7 @@ namespace OrderViewer.Extensions
 {
     public static class OrderHeaderMapper
     {
-        public static OrderHeaderViewModel ToOrderHeaderViewModel(this SalesOrderHeader entity)
+        public static OrderHeaderViewModel ToViewModel(this SalesOrderHeader entity)
         {
             return entity == null ? null : new OrderHeaderViewModel(entity)
             {

@@ -22,7 +22,7 @@ namespace OrderViewer.Tests
 
                 // Assert
                 var value = response.Value as IListModelResponse<OrderSummaryViewModel>;
-
+                
                 Assert.False(value.DidError);
             }
         }

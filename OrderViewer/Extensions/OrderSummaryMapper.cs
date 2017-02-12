@@ -5,7 +5,7 @@ namespace OrderViewer.Extensions
 {
     public static class OrderSummaryMapper
     {
-        public static OrderSummaryViewModel ToOrderSummaryViewModel(this OrderSummary entity)
+        public static OrderSummaryViewModel ToViewModel(this OrderSummary entity)
         {
             return new OrderSummaryViewModel
             {

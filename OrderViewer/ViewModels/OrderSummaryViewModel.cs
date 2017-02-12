@@ -4,6 +4,10 @@ namespace OrderViewer.ViewModels
 {
     public class OrderSummaryViewModel
     {
+        public OrderSummaryViewModel()
+        {
+        }
+
         public Int32? SalesOrderID { get; set; }
 
         public DateTime? OrderDate { get; set; }

@@ -4,6 +4,10 @@ namespace OrderViewer.ViewModels
 {
     public class ProductSubcategoryViewModel
     {
+        public ProductSubcategoryViewModel()
+        {
+        }
+
         public Int32? ProductSubcategoryID { get; set; }
 
         public Int32? ProductCategoryID { get; set; }

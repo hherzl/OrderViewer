@@ -49,7 +49,7 @@ namespace OrderViewer.Controllers
                         .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName)
                         .ToListAsync();
 
-                response.Model = list.Select(item => item.ToOrderSummaryViewModel());
+                response.Model = list.Select(item => item.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
             }
@@ -76,7 +76,7 @@ namespace OrderViewer.Controllers
             {
                 var entity = await SalesRepository.GetOrderAsync(id);
 
-                response.Model = entity.ToOrderHeaderViewModel();
+                response.Model = entity.ToViewModel();
             }
             catch (Exception ex)
             {
