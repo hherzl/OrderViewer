@@ -1,30 +1,31 @@
 ﻿import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { Response } from "@angular/http";
+import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-
-export interface ISalesService {
-    getOrders(pageNumber: number, pageSize: number, salesOrderNumber: string, customerName: string): Observable<Response>;
-
-    getOrder(id: number): Observable<Response>;
-}
+import { BaseService } from "./baseService";
 
 @Injectable()
-export class SalesService implements ISalesService {
+export class SalesService extends BaseService {
     constructor(public http: Http) {
+        super();
     }
 
-    getOrders(pageNumber: number, pageSize: number, salesOrderNumber: string, customerName: string): Observable<Response> {
-        var url : string = "/api/Sales/Order?" +
-            "pageNumber=" + (pageNumber ? pageNumber : 1) +
-            "&pageSize=" + (pageSize ? pageSize : 10) +
-            "&salesOrderNumber=" + (salesOrderNumber ? salesOrderNumber : "") +
-            "&customerName=" + (customerName ? customerName : "");
+    public getOrders(pageNumber: number, pageSize: number, salesOrderNumber: string, customerName: string): Observable<Response> {
+        var api: string = [this.api, "Sales", "Order"].join("/");
+        var queryString: string = [
+            "pageNumber=" + (pageNumber ? pageNumber : 1),
+            "pageSize=" + (pageSize ? pageSize : 10),
+            "salesOrderNumber=" + (salesOrderNumber ? salesOrderNumber : ""),
+            "customerName=" + (customerName ? customerName : "")
+        ].join("&");
+
+        var url = api + "?" + queryString;
+
+        console.log(url);
 
         return this.http.get(url);
     }
 
-    getOrder(id: number): Observable<Response> {
+    public getOrder(id: number): Observable<Response> {
         return this.http.get("/api/Sales/Order/" + id);
     }
 }

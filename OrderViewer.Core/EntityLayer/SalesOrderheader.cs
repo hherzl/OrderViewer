@@ -59,7 +59,8 @@ namespace OrderViewer.Core.EntityLayer
 
         public virtual Customer CustomerFk { get; set; }
 
-        public virtual SalesPerson SalesPersonFk { get; set; }
+        // todo: fix navigation property
+        //public virtual SalesPerson SalesPersonFk { get; set; }
 
         public virtual SalesTerritory SalesTerritoryFk { get; set; }
 

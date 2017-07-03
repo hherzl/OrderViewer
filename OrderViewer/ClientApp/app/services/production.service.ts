@@ -1,21 +1,19 @@
 ﻿import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import { Response } from "@angular/http";
+import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-
-export interface IProductionService {
-    getProductSubcategories(pageNumber: number, pageSize: number): Observable<Response>;
-}
+import { BaseService } from "./baseService";
 
 @Injectable()
-export class ProductionService implements IProductionService {
+export class ProductionService extends BaseService {
     constructor(public http: Http) {
+        super();
     }
 
-    getProductSubcategories(pageNumber: number, pageSize: number): Observable<Response> {
-        var url: string = "/api/Production/ProductSubcategory?" +
-            "pageNumber=" + (pageNumber ? pageNumber : 1) +
-            "&pageSize=" + (pageSize ? pageSize : 10);
+    public getProductSubcategories(pageNumber: number, pageSize: number): Observable<Response> {
+        var api: string = [this.api, "Production", "ProductSubcategory"].join("/");
+        var queryString: string = ["pageNumber=" + (pageNumber ? pageNumber : 1), "pageSize=" + (pageSize ? pageSize : 10)].join("&");
+
+        var url = api + "?" + queryString;
 
         return this.http.get(url);
     }

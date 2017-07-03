@@ -16,15 +16,13 @@ export class ProductSubcategoryListComponent implements OnInit {
     constructor(private router: Router, private service: ProductionService) {
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.search();
     }
 
-    search(): void {
-        this.service
-            .getProductSubcategories(this.pageNumber, this.pageSize)
-            .subscribe(result => {
-                this.result = result.json();
-            });
+    public search(): void {
+        this.service.getProductSubcategories(this.pageNumber, this.pageSize).subscribe(result => {
+            this.result = result.json() as IListResponse<ProductSubcategory>;
+        });
     }
 }

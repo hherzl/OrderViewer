@@ -25,7 +25,7 @@ namespace OrderViewer.ViewModels
             AccountNumber = entity.AccountNumber;
             CustomerName = entity.CustomerFk?.PersonFk?.FirstName + (entity.CustomerFk.PersonFk?.MiddleName == null ? String.Empty : " " + entity.CustomerFk?.PersonFk?.MiddleName) + " " + entity.CustomerFk?.PersonFk?.LastName;
             StoreName = entity.CustomerFk?.StoreFk?.Name;
-            SalesPersonName = entity.SalesPersonFk == null ? String.Empty : entity.SalesPersonFk.PersonFk?.FirstName + (entity.SalesPersonFk.PersonFk?.MiddleName == null ? String.Empty : " " + entity.SalesPersonFk.PersonFk?.MiddleName) + " " + entity.SalesPersonFk.PersonFk?.LastName;
+            //SalesPersonName = entity.SalesPersonFk == null ? String.Empty : entity.SalesPersonFk.PersonFk?.FirstName + (entity.SalesPersonFk.PersonFk?.MiddleName == null ? String.Empty : " " + entity.SalesPersonFk.PersonFk?.MiddleName) + " " + entity.SalesPersonFk.PersonFk?.LastName;
             TerritoryName = entity.SalesTerritoryFk.Name;
             ShipMethodName = entity.ShipMethodFk.Name;
             CurrencyRateID = entity.CurrencyRateID;

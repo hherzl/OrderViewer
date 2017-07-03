@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Composition.Hosting;
+using System.Reflection;
 
 namespace OrderViewer.Core.DataLayer.Mapping
 {
@@ -6,20 +7,14 @@ namespace OrderViewer.Core.DataLayer.Mapping
     {
         public AdventureWorksEntityMapper()
         {
-            Mappings = new List<IEntityMap>()
+            var assemblies = new[] { typeof(AdventureWorksDbContext).GetTypeInfo().Assembly };
+
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(AdventureWorksDbContext).GetTypeInfo().Assembly);
+
+            using (var container = configuration.CreateContainer())
             {
-                new SalesOrderHeaderMap(),
-                new AddressMap(),
-                new ShipMethodMap(),
-                new CustomerMap(),
-                new PersonMap(),
-                new StoreMap(),
-                new SalesPersonMap(),
-                new SalesTerritoryMap(),
-                new SalesOrderDetailMap(),
-                new ProductMap(),
-                new ProductSubcategoryMap()
-            };
+                Mappings = container.GetExports<IEntityMap>();
+            }
         }
     }
 }

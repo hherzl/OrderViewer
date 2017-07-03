@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OrderViewer.Core.EntityLayer;
+﻿using System.Composition;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrderViewer.Core.DataLayer.Mapping
 {
+    [Export(typeof(IEntityMap))]
     public class StoreMap : IEntityMap
     {
         public void Map(ModelBuilder modelBuilder)

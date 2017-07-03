@@ -68,7 +68,8 @@ namespace OrderViewer.Core.DataLayer.Repositories
                 .Set<SalesOrderHeader>()
                 .Include(p => p.CustomerFk.PersonFk)
                 .Include(p => p.CustomerFk.StoreFk)
-                .Include(p => p.SalesPersonFk)
+                // todo: fix navigation property
+                //.Include(p => p.SalesPersonFk)
                 .Include(p => p.SalesTerritoryFk)
                 .Include(p => p.ShipMethodFk)
                 .Include(p => p.BillAddressFk)
