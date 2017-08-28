@@ -9,11 +9,12 @@ namespace OrderViewer.Core.DataLayer.Mapping
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<SalesPerson>();
+            modelBuilder.Entity<SalesPerson>(builder =>
+            {
+                builder.ToTable("SalesPerson", "Sales");
 
-            entity.ToTable("SalesPerson", "Sales");
-
-            entity.HasKey(p => p.BusinessEntityID);
+                builder.HasKey(p => p.BusinessEntityID);
+            });
         }
     }
 }

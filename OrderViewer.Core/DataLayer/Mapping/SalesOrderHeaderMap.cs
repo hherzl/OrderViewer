@@ -9,17 +9,18 @@ namespace OrderViewer.Core.DataLayer.Mapping
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<SalesOrderHeader>();
+            modelBuilder.Entity<SalesOrderHeader>(builder =>
+            {
+                builder.ToTable("SalesOrderHeader", "Sales");
 
-            entity.ToTable("SalesOrderHeader", "Sales");
+                builder.HasKey(p => p.SalesOrderID);
 
-            entity.HasKey(p => p.SalesOrderID);
+                builder.Property(p => p.SalesOrderID).UseSqlServerIdentityColumn();
 
-            entity.Property(p => p.SalesOrderID).UseSqlServerIdentityColumn();
+                builder.HasOne(p => p.BillAddressFk).WithMany(p => p.BillingOrders).HasForeignKey(p => p.BillToAddressID);
 
-            entity.HasOne(p => p.BillAddressFk).WithMany(p => p.BillingOrders).HasForeignKey(p => p.BillToAddressID);
-
-            entity.HasOne(p => p.ShipAddressFk).WithMany(p => p.ShippingOrders).HasForeignKey(p => p.ShipToAddressID);
+                builder.HasOne(p => p.ShipAddressFk).WithMany(p => p.ShippingOrders).HasForeignKey(p => p.ShipToAddressID);
+            });
         }
     }
 }
