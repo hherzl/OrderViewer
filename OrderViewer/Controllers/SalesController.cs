@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.Repositories;
 using OrderViewer.Extensions;
 using OrderViewer.Responses;
 using OrderViewer.ViewModels;
@@ -38,7 +39,7 @@ namespace OrderViewer.Controllers
         [HttpGet("Order")]
         public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
         {
-            var response = new ListModelResponse<OrderSummaryViewModel>() as IListModelResponse<OrderSummaryViewModel>;
+            var response = new ListResponse<OrderSummaryViewModel>();
 
             try
             {
@@ -46,9 +47,10 @@ namespace OrderViewer.Controllers
                 response.PageNumber = (Int32)pageNumber;
 
                 var list = await SalesRepository
-                        .GetOrders((Int32)pageSize, (Int32)pageNumber, salesOrderNumber, customerName)
-                        .ToListAsync();
-
+                    .GetOrders(salesOrderNumber, customerName)
+                    .Paging((Int32)pageSize, (Int32)pageNumber)
+                    .ToListAsync();
+                
                 response.Model = list.Select(item => item.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
@@ -70,7 +72,7 @@ namespace OrderViewer.Controllers
         [HttpGet("Order/{id}")]
         public async Task<IActionResult> GetOrder(Int32 id)
         {
-            var response = new SingleModelResponse<OrderHeaderViewModel>() as ISingleModelResponse<OrderHeaderViewModel>;
+            var response = new SingleResponse<OrderHeaderViewModel>();
 
             try
             {

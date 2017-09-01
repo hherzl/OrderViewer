@@ -16,7 +16,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
         {
         }
 
-        public IQueryable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName)
+        public IQueryable<OrderSummary> GetOrders(String salesOrderNumber, String customerName)
         {
             var query =
                 from orderHeader in DbContext.Set<SalesOrderHeader>()
@@ -59,7 +59,7 @@ namespace OrderViewer.Core.DataLayer.Repositories
                 query = query.OrderByDescending(item => item.SalesOrderID);
             }
 
-            return query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            return query;
         }
 
         public Task<SalesOrderHeader> GetOrderAsync(Int32 orderID)

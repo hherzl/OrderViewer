@@ -60,10 +60,10 @@ namespace OrderViewer
                     License = new License { Name = "Use under LICX", Url = "http://url.com" }
                 });
 
-                //Determine base path for the application.
+                // Determine base path for the application.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
 
-                //Set the comments path for the swagger json and ui.
+                // Set the comments path for the swagger json and ui.
                 var xmlPath = Path.Combine(basePath, "OrderViewer.xml");
 
                 options.IncludeXmlComments(xmlPath);

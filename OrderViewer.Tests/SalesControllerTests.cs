@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderViewer.Controllers;
 using OrderViewer.Responses;
@@ -21,9 +22,10 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrders() as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<OrderSummaryViewModel>;
+                var value = response.Value as IListResponse<OrderSummaryViewModel>;
                 
                 Assert.False(value.DidError);
+                Assert.True(value.Model.Count() > 0);
             }
         }
 
@@ -40,7 +42,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrders(salesOrderNumber: salesOrderNumber) as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<OrderSummaryViewModel>;
+                var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
                 Assert.False(value.DidError);
             }
@@ -59,7 +61,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrders(customerName: customerName) as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<OrderSummaryViewModel>;
+                var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
                 Assert.False(value.DidError);
             }
@@ -79,7 +81,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrders(salesOrderNumber: salesOrderNumber, customerName: customerName) as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<OrderSummaryViewModel>;
+                var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
                 Assert.False(value.DidError);
             }
@@ -98,7 +100,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrder(id) as ObjectResult;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<OrderHeaderViewModel>;
+                var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
 
                 Assert.False(value.DidError);
             }
@@ -117,7 +119,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetOrder(id) as ObjectResult;
 
                 // Assert
-                var value = response.Value as ISingleModelResponse<OrderHeaderViewModel>;
+                var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
 
                 Assert.False(value.DidError);
             }

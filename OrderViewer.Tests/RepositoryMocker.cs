@@ -15,9 +15,7 @@ namespace OrderViewer.Tests
                 ConnectionString = "server=(local);database=AdventureWorks2012;integrated security=yes;"
             });
 
-            var entityMapper = new AdventureWorksEntityMapper() as IEntityMapper;
-
-            return new SalesRepository(new AdventureWorksDbContext(appSettings, entityMapper)) as ISalesRepository;
+            return new SalesRepository(new AdventureWorksDbContext(appSettings, new AdventureWorksEntityMapper()));
         }
 
         public static IProductionRepository GetProductionRepository()
@@ -27,9 +25,7 @@ namespace OrderViewer.Tests
                 ConnectionString = "server=(local);database=AdventureWorks2012;integrated security=yes;"
             });
 
-            var entityMapper = new AdventureWorksEntityMapper() as IEntityMapper;
-
-            return new ProductionRepository(new AdventureWorksDbContext(appSettings, entityMapper)) as IProductionRepository;
+            return new ProductionRepository(new AdventureWorksDbContext(appSettings, new AdventureWorksEntityMapper()));
         }
     }
 }

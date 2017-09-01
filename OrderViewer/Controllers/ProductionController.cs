@@ -36,7 +36,7 @@ namespace OrderViewer.Controllers
         [HttpGet("ProductSubcategory")]
         public async Task<IActionResult> GetProductSubcategories(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
-            var response = new ListModelResponse<ProductSubcategoryViewModel>() as IListModelResponse<ProductSubcategoryViewModel>;
+            var response = new ListResponse<ProductSubcategoryViewModel>();
 
             try
             {

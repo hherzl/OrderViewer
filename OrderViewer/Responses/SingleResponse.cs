@@ -2,7 +2,7 @@
 
 namespace OrderViewer.Responses
 {
-    public class SingleModelResponse<TModel> : ISingleModelResponse<TModel>
+    public class SingleResponse<TModel> : ISingleResponse<TModel>
     {
         public String Message { get; set; }
 

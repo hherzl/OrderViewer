@@ -21,7 +21,7 @@ namespace OrderViewer.Tests
                 var response = await controller.GetProductSubcategories() as ObjectResult;
 
                 // Assert
-                var value = response.Value as IListModelResponse<ProductSubcategoryViewModel>;
+                var value = response.Value as IListResponse<ProductSubcategoryViewModel>;
 
                 Assert.False(value.DidError);
             }

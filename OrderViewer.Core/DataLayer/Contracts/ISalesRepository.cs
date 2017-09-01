@@ -8,7 +8,7 @@ namespace OrderViewer.Core.DataLayer.Contracts
 {
     public interface ISalesRepository : IRepository
     {
-        IQueryable<OrderSummary> GetOrders(Int32 pageSize, Int32 pageNumber, String salesOrderNumber, String customerName);
+        IQueryable<OrderSummary> GetOrders(String salesOrderNumber, String customerName);
 
         Task<SalesOrderHeader> GetOrderAsync(Int32 orderID);
     }
