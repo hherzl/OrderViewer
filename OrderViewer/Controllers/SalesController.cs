@@ -46,8 +46,7 @@ namespace OrderViewer.Controllers
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
 
-                var list = await SalesRepository
-                    .GetOrders(salesOrderNumber, customerName)
+                var list = await SalesRepository.GetOrders(salesOrderNumber, customerName)
                     .Paging((Int32)pageSize, (Int32)pageNumber)
                     .ToListAsync();
                 

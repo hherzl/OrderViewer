@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
+using OrderViewer.Core.DataLayer.Repositories;
 using OrderViewer.Extensions;
 using OrderViewer.Responses;
 using OrderViewer.ViewModels;
@@ -43,9 +44,9 @@ namespace OrderViewer.Controllers
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
 
-                var list = await ProductionRepository
-                        .GetProductSubcategories((Int32)pageSize, (Int32)pageNumber)
-                        .ToListAsync();
+                var list = await ProductionRepository.GetProductSubcategories()
+                    .Paging((Int32)pageSize, (Int32)pageNumber)
+                    .ToListAsync();
 
                 response.Model = list.Select(item => item.ToViewModel());
 
