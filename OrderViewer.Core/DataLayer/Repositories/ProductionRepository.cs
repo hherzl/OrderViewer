@@ -12,14 +12,6 @@ namespace OrderViewer.Core.DataLayer.Repositories
         }
 
         public IQueryable<ProductSubcategory> GetProductSubcategories()
-        {
-            //Int32 pageSize, Int32 pageNumber
-            //Int32 pageSize, Int32 pageNumber
-
-            return from productSubcategory in DbContext.Set<ProductSubcategory>()
-                   select productSubcategory;
-
-            //return pageSize > 0 && pageNumber > 0 ? query.Skip((pageNumber - 1) * pageSize).Take(pageSize) : query;
-        }
+            => DbContext.Set<ProductSubcategory>();
     }
 }

@@ -41,13 +41,20 @@ namespace OrderViewer.Controllers
 
             try
             {
+                // Get query
+                var query = ProductionRepository.GetProductSubcategories();
+
+                // Set information for paging
                 response.PageSize = (Int32)pageSize;
                 response.PageNumber = (Int32)pageNumber;
+                response.ItemsCount = await query.CountAsync();
 
-                var list = await ProductionRepository.GetProductSubcategories()
+                // Retrieve items
+                var list = await query
                     .Paging((Int32)pageSize, (Int32)pageNumber)
                     .ToListAsync();
 
+                // Set model for response
                 response.Model = list.Select(item => item.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { IListResponse } from "../../responses/list.response";
+import { IListResponse, ListResponse } from "../../responses/list.response";
 import { OrderSummary } from "../../models/order.summary";
 import { SalesService } from "../../services/sales.service";
 
@@ -9,13 +9,12 @@ import { SalesService } from "../../services/sales.service";
     template: require("./order-list.component.html")
 })
 export class OrderListComponent implements OnInit {
-    public pageNumber: number;
-    public pageSize: number;
     public salesOrderNumber: string;
     public customerName: string;
     public result: IListResponse<OrderSummary>;
 
     constructor(private router: Router, private service: SalesService) {
+        this.result = new ListResponse<OrderSummary>();
     }
 
     ngOnInit(): void {
@@ -24,7 +23,7 @@ export class OrderListComponent implements OnInit {
 
     search(): void {
         this.service
-            .getOrders(this.pageNumber, this.pageSize, this.salesOrderNumber, this.customerName)
+            .getOrders(this.result.pageNumber, this.result.pageSize, this.salesOrderNumber, this.customerName)
             .subscribe(result => {
                 this.result = result.json();
             });

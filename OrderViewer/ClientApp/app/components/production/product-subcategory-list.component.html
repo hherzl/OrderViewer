@@ -5,7 +5,7 @@
 
     <div class="form-inline">
         <div class="form-group">
-            <select id="pageSize" name="pageSize" class="form-control list-box tri-state" [(ngModel)]="pageSize">
+            <select id="pageSize" name="pageSize" class="form-control list-box tri-state" [(ngModel)]="result.pageSize">
                 <option value="10" selected="selected">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -39,8 +39,10 @@
         <td>
             {{ item.name }}
         </td>
-        <td>
-            
-        </td>
+        <td></td>
     </tr>
 </table>
+
+<div *ngIf="result">
+    Page <strong>{{ result.pageNumber }}</strong> of <strong>{{ result.pageCount }}</strong>
+</div>

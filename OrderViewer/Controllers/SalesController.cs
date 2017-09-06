@@ -43,13 +43,18 @@ namespace OrderViewer.Controllers
 
             try
             {
-                response.PageSize = (Int32)pageSize;
-                response.PageNumber = (Int32)pageNumber;
+                // Get query
+                var query = SalesRepository.GetOrders(salesOrderNumber, customerName);
 
-                var list = await SalesRepository.GetOrders(salesOrderNumber, customerName)
-                    .Paging((Int32)pageSize, (Int32)pageNumber)
-                    .ToListAsync();
-                
+                // Set information for paging
+                response.PageSize = (int)pageSize;
+                response.PageNumber = (int)pageNumber;
+                response.ItemsCount = await query.CountAsync();
+
+                // Retrieve items
+                var list = await query.Paging((int)pageSize, (int)pageNumber).ToListAsync();
+
+                // Set model for response
                 response.Model = list.Select(item => item.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
