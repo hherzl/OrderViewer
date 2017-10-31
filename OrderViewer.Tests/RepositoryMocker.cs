@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.DataLayer.Mapping;
@@ -8,24 +8,25 @@ namespace OrderViewer.Tests
 {
     public static class RepositoryMocker
     {
+        private static string ConnectionString
+            => "server=(local);database=AdventureWorks2012;integrated security=yes;";
+
         public static ISalesRepository GetSalesRepository()
         {
-            var appSettings = Options.Create(new AppSettings
-            {
-                ConnectionString = "server=(local);database=AdventureWorks2012;integrated security=yes;"
-            });
+            var options = new DbContextOptionsBuilder<AdventureWorksDbContext>()
+                .UseSqlServer(ConnectionString)
+                .Options;
 
-            return new SalesRepository(new AdventureWorksDbContext(appSettings, new AdventureWorksEntityMapper()));
+            return new SalesRepository(new AdventureWorksDbContext(options, new AdventureWorksEntityMapper()));
         }
 
         public static IProductionRepository GetProductionRepository()
         {
-            var appSettings = Options.Create(new AppSettings
-            {
-                ConnectionString = "server=(local);database=AdventureWorks2012;integrated security=yes;"
-            });
+            var options = new DbContextOptionsBuilder<AdventureWorksDbContext>()
+                .UseSqlServer(ConnectionString)
+                .Options;
 
-            return new ProductionRepository(new AdventureWorksDbContext(appSettings, new AdventureWorksEntityMapper()));
+            return new ProductionRepository(new AdventureWorksDbContext(options, new AdventureWorksEntityMapper()));
         }
     }
 }

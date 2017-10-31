@@ -2,6 +2,7 @@ using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,15 +35,13 @@ namespace OrderViewer
             // Add framework services.
             services.AddMvc();
 
-            services.AddEntityFrameworkSqlServer().AddDbContext<AdventureWorksDbContext>();
+            services.AddDbContext<AdventureWorksDbContext>(options => options.UseSqlServer(Configuration["AppSettings:ConnectionString"]));
 
             services.AddScoped<IEntityMapper, AdventureWorksEntityMapper>();
             services.AddScoped<ISalesRepository, SalesRepository>();
             services.AddScoped<IProductionRepository, ProductionRepository>();
 
             services.AddOptions();
-
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddSingleton<IConfiguration>(Configuration);
 

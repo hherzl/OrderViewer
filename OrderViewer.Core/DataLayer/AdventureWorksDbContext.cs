@@ -1,31 +1,21 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Mapping;
 
 namespace OrderViewer.Core.DataLayer
 {
-    public class AdventureWorksDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class AdventureWorksDbContext : DbContext
     {
-        public AdventureWorksDbContext(IOptions<AppSettings> appSettings, IEntityMapper entityMapper)
+        public AdventureWorksDbContext(DbContextOptions<AdventureWorksDbContext> options, IEntityMapper entityMapper)
+            : base(options)
         {
-            ConnectionString = appSettings.Value.ConnectionString;
             EntityMapper = entityMapper;
         }
 
-        public String ConnectionString { get; }
-
         public IEntityMapper EntityMapper { get; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConnectionString);
-
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Load all mappings for entities
             EntityMapper.MapEntities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);

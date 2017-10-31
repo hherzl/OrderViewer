@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OrderViewer.Core.EntityLayer;
-using OrderViewer.ViewModels;
 
-namespace OrderViewer.Extensions
+namespace OrderViewer.ViewModels
 {
     public static class OrderHeaderMapper
     {

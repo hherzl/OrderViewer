@@ -1,7 +1,6 @@
 ﻿using OrderViewer.Core.DataLayer.DataContracts;
-using OrderViewer.ViewModels;
 
-namespace OrderViewer.Extensions
+namespace OrderViewer.ViewModels
 {
     public static class OrderSummaryMapper
     {

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrderViewer.Core.DataLayer.Contracts;
 using OrderViewer.Core.DataLayer.Repositories;
-using OrderViewer.Extensions;
 using OrderViewer.Responses;
 using OrderViewer.ViewModels;
 
@@ -61,8 +60,7 @@ namespace OrderViewer.Controllers
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response.ToHttpResponse();
