@@ -36,7 +36,7 @@ namespace OrderViewer.Controllers
         /// <param name="customerName">Customer name</param>
         /// <returns>A ListModelResponse of OrderSummaryViewModel</returns>
         [HttpGet("Order")]
-        public async Task<IActionResult> GetOrders(Int32? pageSize = 10, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
+        public async Task<IActionResult> GetOrdersAsync(Int32? pageSize = 10, Int32? pageNumber = 1, String salesOrderNumber = "", String customerName = "")
         {
             var response = new ListResponse<OrderSummaryViewModel>();
 
@@ -54,7 +54,7 @@ namespace OrderViewer.Controllers
                 var list = await query.Paging((int)pageSize, (int)pageNumber).ToListAsync();
 
                 // Set model for response
-                response.Model = list.Select(item => item.ToViewModel());
+                response.Model = list.Select(item => item?.ToViewModel());
 
                 response.Message = String.Format("Total of records: {0}", response.Model.Count());
             }
@@ -72,7 +72,7 @@ namespace OrderViewer.Controllers
         /// <param name="id">Order ID</param>
         /// <returns>A SingleModelResponse of OrderHeaderViewModel</returns>
         [HttpGet("Order/{id}")]
-        public async Task<IActionResult> GetOrder(Int32 id)
+        public async Task<IActionResult> GetOrderAsync(Int32 id)
         {
             var response = new SingleResponse<OrderHeaderViewModel>();
 
@@ -80,12 +80,11 @@ namespace OrderViewer.Controllers
             {
                 var entity = await SalesRepository.GetOrderAsync(id);
 
-                response.Model = entity.ToViewModel();
+                response.Model = entity?.ToViewModel();
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response.ToHttpResponse();

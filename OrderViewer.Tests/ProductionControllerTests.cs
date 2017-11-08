@@ -12,19 +12,18 @@ namespace OrderViewer.Tests
         [Fact]
         public async Task TestGetProductSubcategoriesAsync()
         {
-            using (var repository = RepositoryMocker.GetProductionRepository())
-            {
-                // Arrange
-                var controller = new ProductionController(repository);
+            // Arrange
+            var repository = RepositoryMocker.GetProductionRepository();
+            var controller = new ProductionController(repository);
 
-                // Act
-                var response = await controller.GetProductSubcategories() as ObjectResult;
+            // Act
+            var response = await controller.GetProductSubcategoriesAsync() as ObjectResult;
+            var value = response.Value as IListResponse<ProductSubcategoryViewModel>;
 
-                // Assert
-                var value = response.Value as IListResponse<ProductSubcategoryViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
     }
 }

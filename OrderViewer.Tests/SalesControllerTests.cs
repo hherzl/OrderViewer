@@ -13,116 +13,110 @@ namespace OrderViewer.Tests
         [Fact]
         public async Task TestGetOrdersAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
 
-                // Act
-                var response = await controller.GetOrders() as ObjectResult;
+            // Act
+            var response = await controller.GetOrdersAsync() as ObjectResult;
+            var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
-                // Assert
-                var value = response.Value as IListResponse<OrderSummaryViewModel>;
-                
-                Assert.False(value.DidError);
-                Assert.True(value.Model.Count() > 0);
-            }
+            repository.Dispose();
+
+            // Assert
+            Assert.False(value.DidError);
+            Assert.True(value.Model.Count() > 0);
         }
 
         [Fact]
         public async Task TestGetOrdersSearchingBySalesOrderNumberAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
-                var salesOrderNumber = "so72";
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
+            var salesOrderNumber = "so72";
 
-                // Act
-                var response = await controller.GetOrders(salesOrderNumber: salesOrderNumber) as ObjectResult;
+            // Act
+            var response = await controller.GetOrdersAsync(salesOrderNumber: salesOrderNumber) as ObjectResult;
+            var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
-                // Assert
-                var value = response.Value as IListResponse<OrderSummaryViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
 
         [Fact]
         public async Task TestGetOrdersSearchingByCustomerNameAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
-                var customerName = "her";
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
+            var customerName = "her";
 
-                // Act
-                var response = await controller.GetOrders(customerName: customerName) as ObjectResult;
+            // Act
+            var response = await controller.GetOrdersAsync(customerName: customerName) as ObjectResult;
+            var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
-                // Assert
-                var value = response.Value as IListResponse<OrderSummaryViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
 
         [Fact]
         public async Task TestGetOrdersSearchingBySalesOrderNumberAndCustomerNameAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
-                var salesOrderNumber = "so72";
-                var customerName = "her";
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
+            var salesOrderNumber = "so72";
+            var customerName = "her";
 
-                // Act
-                var response = await controller.GetOrders(salesOrderNumber: salesOrderNumber, customerName: customerName) as ObjectResult;
+            // Act
+            var response = await controller.GetOrdersAsync(salesOrderNumber: salesOrderNumber, customerName: customerName) as ObjectResult;
+            var value = response.Value as IListResponse<OrderSummaryViewModel>;
 
-                // Assert
-                var value = response.Value as IListResponse<OrderSummaryViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
 
         [Fact]
         public async Task TestGetOrderAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
-                var id = 75123;
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
+            var id = 75123;
 
-                // Act
-                var response = await controller.GetOrder(id) as ObjectResult;
+            // Act
+            var response = await controller.GetOrderAsync(id) as ObjectResult;
+            var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
 
-                // Assert
-                var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
 
         [Fact]
         public async Task TestGetOrderNotFoundAsync()
         {
-            using (var repository = RepositoryMocker.GetSalesRepository())
-            {
-                // Arrange
-                var controller = new SalesController(repository);
-                var id = 0;
+            // Arrange
+            var repository = RepositoryMocker.GetSalesRepository();
+            var controller = new SalesController(repository);
+            var id = 0;
 
-                // Act
-                var response = await controller.GetOrder(id) as ObjectResult;
+            // Act
+            var response = await controller.GetOrderAsync(id) as ObjectResult;
+            var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
 
-                // Assert
-                var value = response.Value as ISingleResponse<OrderHeaderViewModel>;
+            repository.Dispose();
 
-                Assert.False(value.DidError);
-            }
+            // Assert
+            Assert.False(value.DidError);
         }
     }
 }

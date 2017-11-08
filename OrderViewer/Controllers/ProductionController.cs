@@ -34,7 +34,7 @@ namespace OrderViewer.Controllers
         /// <param name="pageNumber">Page number</param>
         /// <returns>A ListModelResponse of ProductSubcategoryViewModel</returns>
         [HttpGet("ProductSubcategory")]
-        public async Task<IActionResult> GetProductSubcategories(Int32? pageSize = 10, Int32? pageNumber = 1)
+        public async Task<IActionResult> GetProductSubcategoriesAsync(Int32? pageSize = 10, Int32? pageNumber = 1)
         {
             var response = new ListResponse<ProductSubcategoryViewModel>();
 
@@ -60,8 +60,7 @@ namespace OrderViewer.Controllers
             }
             catch (Exception ex)
             {
-                response.DidError = true;
-                response.ErrorMessage = ex.Message;
+                response.SetError(ex);
             }
 
             return response.ToHttpResponse();

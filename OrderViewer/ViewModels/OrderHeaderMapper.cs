@@ -8,7 +8,7 @@ namespace OrderViewer.ViewModels
     {
         public static OrderHeaderViewModel ToViewModel(this SalesOrderHeader entity)
         {
-            return entity == null ? null : new OrderHeaderViewModel(entity)
+            return new OrderHeaderViewModel(entity)
             {
                 BillAddress = new AddressViewModel(entity.BillAddressFk),
                 ShipAddress = new AddressViewModel(entity.ShipAddressFk),
